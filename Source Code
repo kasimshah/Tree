@@ -75,7 +75,7 @@ public:
     node* insert(node *root, int data)
     {
         
-        node *enter; //Node to put in tree
+        node *enter; 
         
         //Create the node to put in the tree
         if(root==NULL)
