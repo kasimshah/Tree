@@ -1,0 +1,212 @@
+
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+/*Creating a binary search tree that the user enters how many integers they want to enter, 
+ enter the integers and then the tree prints out the number based on in order tree transversal
+ */
+
+using namespace std;
+
+ struct node
+ {
+     int data;
+     node* left;
+     node* right;
+ };
+
+class Tree
+{
+    
+private:
+    
+public:
+    
+    //Function for entering in the data
+    node* enterData(void)
+    {
+        
+        int num; //How many number to enter
+        node *root; //Root of the tree
+        
+        root=NULL; //Initialze the root of the tree
+        
+        cout<<"how many number would you like to enter"<<endl;
+        cin>>num;
+        
+        int data;//Data to pass to insert functin to tree
+        
+        //For loop for the user to enter in the data and then insert the data in the correct postion in the binary search tree
+        for(int i=0; i<num; i++)
+        {
+            
+            cout<<"enter"<<endl;
+            cin>>data;
+            
+            root=insert(root, data); //Function call for inserting into the tree
+            
+        }
+        
+        return root;
+        
+    }
+    
+    //Method for inserting the data in the correct position in the binary search tree
+    node* insert(node *root, int data)
+    {
+        
+        node *enter; //Node to put in tree
+        
+        //Create the node to put in the tree
+        if(root==NULL)
+        {
+            
+            enter =new node;
+            enter->data=data;
+            enter->left=NULL;
+            enter->right=NULL;
+            
+            root=enter;
+            
+        }
+        
+        //Go to the left of the tree if the inserted value is less
+        else if((root->data) > data)
+        {
+            
+            root->left=insert(root->left, data);
+            
+        }
+        
+        //Go to the right of the tree if the inserted value is greater
+        else if((root->data) < data)
+        {
+            
+            root->right=insert(root->right, data);
+            
+        }
+        
+        return root;
+        
+    }
+    
+    //Method for transversing through the tree using in-order transversal and print it out
+    void inOrder(node *root)
+    {
+        
+        //Go to the left of the tree
+        if(root->left)
+        {
+            
+            inOrder(root->left);
+            
+        }
+        
+        cout<<root->data<<" ";
+        
+        //Go to the right of the tree
+        if(root->right)
+        {
+            
+            inOrder(root->right);
+            
+        }
+        
+    }
+    
+    //Method for transversing through the tree using pre-order transversal and print it out
+    void preOrder(node *root)
+    {
+        
+        cout<<root->data<<" ";
+        
+        //Go to the left of the tree
+        if(root->left)
+        {
+            
+            preOrder(root->left);
+            
+        }
+
+        //Go to the right of the tree
+        if(root->right)
+        {
+            
+            preOrder(root->right);
+            
+        }
+        
+    }
+    
+    //Method for transversing through the tree using poat-order transversal and print it out
+    void postOrder(node *root)
+    {
+        
+        //Go to the left of the tree
+        if(root->left)
+        {
+            
+            postOrder(root->left);
+            
+        }
+        
+        //Go to the right of the tree
+        if(root->right)
+        {
+            
+            postOrder(root->right);
+            
+        }
+        
+        cout<<root->data<<" ";
+        
+    }
+    
+};
+
+int main()
+{
+    
+    node *root; //To hold the root of the tree
+    Tree tree; //Instance of tree object to call the different tree methods
+    
+    root=tree.enterData();
+    
+    cout<<" "<<endl;
+    cout<<"print the tree in inOrder"<<endl;
+    tree.inOrder(root);
+    
+    cout<<" "<<endl;
+    cout<<" "<<endl;
+    cout<<"print the tree in preorder"<<endl;
+    tree.preOrder(root);
+    
+    cout<<" "<<endl;
+    cout<<" "<<endl;
+    cout<<"print the tree in preorder"<<endl;
+    tree.postOrder(root);
+    
+    return 0;
+    
+}
+
